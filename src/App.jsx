@@ -4,6 +4,8 @@ import { useState } from "react";
 
 const API_WEATHER = `http://api.weatherapi.com/v1/current.json?key=dd02788f02fe4de7994205408240406&lang=es&q=`;
 
+
+
 export default function App() {
   const [city, setCity] = useState("");
   const [error, setError] = useState({
@@ -57,7 +59,7 @@ export default function App() {
   return (
     <Container
       maxWidth="xs"
-      sx={{mt: 2}}
+      sx={{ mt: 2, }}
     >
       <Typography
         variant="h3"
@@ -75,7 +77,7 @@ export default function App() {
       >
         <TextField
           id="city"
-          label="Ciudad"
+          label="Donde Vives?"
           variant="outlined"
           size="small"
           required
