@@ -179,6 +179,19 @@ export default function App() {
             WeatherAPI.com
           </a>
         </Typography>
+
+        <Typography
+          textAlign="center"
+          sx={{ mt: 2, fontSize: "10px" }}
+        >
+          Creador por:{" "}
+          <a
+            href="https://github.com/Leanquiroga/consume-apiClima"
+            title="Github Leanquiroga"
+          >
+            Github Leanquiroga
+          </a>
+        </Typography>
       </Container>
     </ThemeProvider>
   );
