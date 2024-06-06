@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { LoadingButton } from "@mui/lab";
 import { Box, Container, TextField, Typography, IconButton, createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import { useState, useMemo } from "react";
@@ -33,40 +34,46 @@ export default function App() {
       },
     }), [darkMode]);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    setError({ error: false, message: "" });
-    setLoading(true);
-
-    try {
-      if (!city.trim()) throw { message: "El campo ciudad es obligatorio" };
-
-      const res = await fetch(API_FORECAST + city + "&days=3");
-      const data = await res.json();
-
-      if (data.error) {
-        throw { message: data.error.message };
+    const onSubmit = async (e) => {
+      e.preventDefault();
+      setError({ error: false, message: "" });
+      setLoading(true);
+    
+      try {
+        if (!city.trim()) throw { message: "El campo ciudad es obligatorio" };
+    
+        const res = await fetch(API_FORECAST + city + "&days=3");
+        const data = await res.json();
+    
+        if (data.error) {
+          throw { message: data.error.message };
+        }
+    
+        console.log(data);
+    
+        const weatherData = {
+          city: data.location.name,
+          country: data.location.country,
+          temperature: data.current.temp_c,
+          condition: data.current.condition.code,
+          conditionText: data.current.condition.text,
+          icon: data.current.condition.icon,
+          forecast: data.forecast.forecastday,
+        };
+    
+        setWeather(weatherData);
+        setForecast(data.forecast.forecastday);
+    
+        // Send weather data to the backend
+        await axios.post('http://localhost:5000/api/weather', weatherData);
+    
+      } catch (error) {
+        console.log(error);
+        setError({ error: true, message: error.message });
+      } finally {
+        setLoading(false);
       }
-
-      console.log(data);
-
-      setWeather({
-        city: data.location.name,
-        country: data.location.country,
-        temperature: data.current.temp_c,
-        condition: data.current.condition.code,
-        conditionText: data.current.condition.text,
-        icon: data.current.condition.icon,
-      });
-
-      setForecast(data.forecast.forecastday);
-    } catch (error) {
-      console.log(error);
-      setError({ error: true, message: error.message });
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
   return (
     <ThemeProvider theme={theme}>
