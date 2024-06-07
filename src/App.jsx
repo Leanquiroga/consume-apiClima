@@ -64,7 +64,6 @@ export default function App() {
         setWeather(weatherData);
         setForecast(data.forecast.forecastday);
     
-        // Send weather data to the backend
         await axios.post('http://localhost:5000/api/weather', weatherData);
     
       } catch (error) {
@@ -191,10 +190,10 @@ export default function App() {
           textAlign="center"
           sx={{ mt: 2, fontSize: "10px" }}
         >
-          Creador por:{" "}
+          Github:{" "}
           <a
             href="https://github.com/Leanquiroga/consume-apiClima"
-            title="Github Leanquiroga"
+            title="Leanquiroga"
           >
             Github Leanquiroga
           </a>
