@@ -188,14 +188,14 @@ export default function App() {
 
         <Typography
           textAlign="center"
-          sx={{ mt: 2, fontSize: "10px" }}
+          sx={{ mt: 2, fontSize: "15px" }}
         >
-          Github:{" "}
+          Github: {" "}
           <a
             href="https://github.com/Leanquiroga/consume-apiClima"
             title="Leanquiroga"
           >
-            Github Leanquiroga
+          Leanquiroga
           </a>
         </Typography>
       </Container>
